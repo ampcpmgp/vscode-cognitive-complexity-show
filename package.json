@@ -6,6 +6,7 @@
   "engines": {
     "vscode": "^1.65.0"
   },
+  "publisher": "ampcpmgp",
   "categories": [
     "Other"
   ],
