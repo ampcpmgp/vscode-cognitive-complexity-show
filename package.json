@@ -9,6 +9,10 @@
   "categories": [
     "Other"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ampcpmgp/vscode-cognitive-complexity-show"
+  },
   "activationEvents": [
     "onCommand:cognitive-complexity-show.execute",
     "onCommand:cognitive-complexity-show.clear"
