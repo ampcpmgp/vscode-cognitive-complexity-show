@@ -7,7 +7,7 @@ const {
   Position,
 } = require("vscode");
 
-const { getFileOutput } = require("cognitive-complexity-ts");
+const { getFileOutput, FileOutput } = require("cognitive-complexity-ts");
 
 const decorationType = window.createTextEditorDecorationType({
   after: { margin: "0 0 0 1rem" },
@@ -38,15 +38,40 @@ function getColor(complexity) {
 
 /**
  *
+ * @param {FileOutput["inner"]} inner
+ */
+function getScoreSum(inner) {
+  return inner.reduce((acc, item) => {
+    const sum = getScoreSum(item.inner);
+
+    return acc + item.score + sum;
+  }, 0);
+}
+
+/**
+ *
+ * @param {FileOutput["inner"]} inner
+ */
+function flattenInner(inner) {
+  return inner.reduce((acc, item) => {
+    const flatten = flattenInner(item.inner);
+    item.score -= getScoreSum(item.inner);
+
+    return [...acc, item, ...flatten];
+  }, []);
+}
+
+/**
+ *
  * @param {TextDocument} document
  */
 async function processActiveFile(document) {
-  console.log("cognitive-complexity-show", document);
   let arr = {};
 
-  const result = await getFileOutput(document.fileName);
+  const output = await getFileOutput(document.fileName);
+  const flatten = flattenInner(output.inner);
 
-  console.log("filtered log result", result);
+  console.log("filtered log flatten", flatten);
 
   arr[1] = decoration(1, "Cognitive Complexity: 5", "green");
   arr[2] = decoration(2, "Cognitive Complexity: 15", "yellow");
