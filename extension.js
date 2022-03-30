@@ -7,6 +7,8 @@ const {
   Position,
 } = require("vscode");
 
+const { getFileOutput } = require("cognitive-complexity-ts");
+
 const decorationType = window.createTextEditorDecorationType({
   after: { margin: "0 0 0 1rem" },
 });
@@ -19,6 +21,11 @@ function activate(context) {
     commands.registerCommand("cognitive-complexity-show.execute", () => {
       const document = window.activeTextEditor?.document;
       if (document) processActiveFile(document);
+    }),
+    commands.registerCommand("cognitive-complexity-show.clear", () => {
+      window.visibleTextEditors.forEach((textEditor) => {
+        textEditor.setDecorations(decorationType, []);
+      });
     })
   );
 }
@@ -36,6 +43,10 @@ function getColor(complexity) {
 async function processActiveFile(document) {
   console.log("cognitive-complexity-show", document);
   let arr = {};
+
+  const result = await getFileOutput(document.fileName);
+
+  console.log("filtered log result", result);
 
   arr[1] = decoration(1, "Cognitive Complexity: 5", "green");
   arr[2] = decoration(2, "Cognitive Complexity: 15", "yellow");

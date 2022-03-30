@@ -10,7 +10,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:cognitive-complexity-show.execute"
+    "onCommand:cognitive-complexity-show.execute",
+    "onCommand:cognitive-complexity-show.clear"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -18,6 +19,10 @@
       {
         "command": "cognitive-complexity-show.execute",
         "title": "Execute cognitive-complexity-show"
+      },
+      {
+        "command": "cognitive-complexity-show.clear",
+        "title": "Clear cognitive-complexity-show"
       }
     ]
   },
