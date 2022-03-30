@@ -71,11 +71,15 @@ async function processActiveFile(document) {
   const output = await getFileOutput(document.fileName);
   const flatten = flattenInner(output.inner);
 
-  console.log("filtered log flatten", flatten);
+  // console.log("filtered log flatten", flatten);
 
-  arr[1] = decoration(1, "Cognitive Complexity: 5", "green");
-  arr[2] = decoration(2, "Cognitive Complexity: 15", "yellow");
-  arr[3] = decoration(3, "Cognitive Complexity: 25", "red");
+  flatten.forEach((item) => {
+    arr[item.line] = decoration(
+      item.line,
+      `Cognitive Complexity: ${item.score}`,
+      getColor(item.score)
+    );
+  });
 
   const editor = window.visibleTextEditors.find(
     (editor) => editor.document === document
