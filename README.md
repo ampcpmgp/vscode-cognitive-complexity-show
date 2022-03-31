@@ -17,8 +17,6 @@ If you want to delete result, clear.
 ![image-20220330163110832.png](./images/image-20220330163110832.png)
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 0.0.1
 
 Initial release of cognitive-complexity-show.

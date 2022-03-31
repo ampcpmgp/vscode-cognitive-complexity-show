@@ -69,9 +69,12 @@ async function processActiveFile(document) {
   let arr = {};
 
   const output = await getFileOutput(document.fileName);
+
+  console.log("filtered log flatten", JSON.stringify(output, null, "  "));
+
   const flatten = flattenInner(output.inner);
 
-  // console.log("filtered log flatten", flatten);
+  console.log("filtered log flatten", flatten);
 
   flatten.forEach((item) => {
     arr[item.line] = decoration(
