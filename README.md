@@ -2,7 +2,7 @@
 
 ## Features
 
-Show file cognitive complexity. (only .js, ts, .jsx, .tsx)
+Show file cognitive complexity. (Only supported .js, ts, .jsx, .tsx)
 
 First, execute.
 
