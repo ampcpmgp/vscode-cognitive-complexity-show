@@ -5,7 +5,10 @@ const {
   TextDocument,
   Range,
   Position,
+  workspace,
 } = require("vscode");
+
+let isActive = true;
 
 const { getFileOutput, FileOutput } = require("cognitive-complexity-ts");
 
@@ -17,6 +20,9 @@ const decorationType = window.createTextEditorDecorationType({
  * @param {ExtensionContext} context
  */
 function activate(context) {
+  workspace.onDidChangeTextDocument((ev) => processActiveFile(ev.document));
+  window.onDidChangeActiveTextEditor((ev) => processActiveFile(ev?.document));
+
   context.subscriptions.push(
     commands.registerCommand("cognitive-complexity-show.execute", () => {
       const document = window.activeTextEditor?.document;
@@ -24,10 +30,24 @@ function activate(context) {
     }),
     commands.registerCommand("cognitive-complexity-show.clear", () => {
       window.visibleTextEditors.forEach((textEditor) => {
-        textEditor.setDecorations(decorationType, []);
+        clearDecorations();
       });
+    }),
+    commands.registerCommand("cognitive-complexity-show.toggle", () => {
+      isActive = !isActive;
+      if (isActive) {
+        processActiveFile(window.activeTextEditor?.document);
+      } else {
+        deactivate();
+      }
     })
   );
+}
+
+function clearDecorations() {
+  window.visibleTextEditors.forEach((textEditor) => {
+    textEditor.setDecorations(decorationType, []);
+  });
 }
 
 function getColor(complexity) {
@@ -66,20 +86,17 @@ function flattenInner(inner) {
  * @param {TextDocument} document
  */
 async function processActiveFile(document) {
+  if (!document || !isActive || !language(document)) return;
+
   let arr = {};
 
   const output = await getFileOutput(document.fileName);
-
-  console.log("filtered log flatten", JSON.stringify(output, null, "  "));
-
   const flatten = flattenInner(output.inner);
-
-  console.log("filtered log flatten", flatten);
 
   flatten.forEach((item) => {
     arr[item.line] = decoration(
       item.line,
-      `Cognitive Complexity: ${item.score}`,
+      `${item.score} - Cognitive Complexity`,
       getColor(item.score)
     );
   });
@@ -91,6 +108,18 @@ async function processActiveFile(document) {
   editor.setDecorations(decorationType, Object.values(arr));
 }
 
+function language({ languageId }) {
+  switch (languageId) {
+    case "typescript":
+    case "typescriptreact":
+    case "javascript":
+    case "javascriptreact":
+      return "TS or JS";
+    default:
+      return undefined;
+  }
+}
+
 function decoration(line, text, color) {
   return {
     renderOptions: { after: { contentText: text, color } },
@@ -100,7 +129,9 @@ function decoration(line, text, color) {
     ),
   };
 }
-function deactivate() {}
+function deactivate() {
+  clearDecorations();
+}
 
 module.exports = {
   activate,

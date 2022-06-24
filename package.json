@@ -16,7 +16,8 @@
   },
   "activationEvents": [
     "onCommand:cognitive-complexity-show.execute",
-    "onCommand:cognitive-complexity-show.clear"
+    "onCommand:cognitive-complexity-show.clear",
+    "onCommand:cognitive-complexity-show.toggle"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -28,6 +29,10 @@
       {
         "command": "cognitive-complexity-show.clear",
         "title": "Clear cognitive-complexity-show"
+      },
+      {
+        "command": "cognitive-complexity-show.toggle",
+        "title": "Toggle cognitive-complexity-show"
       }
     ]
   },
