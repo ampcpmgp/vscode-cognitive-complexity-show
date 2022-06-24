@@ -17,9 +17,13 @@ If you want to delete result, clear.
 ![image-20220330163110832.png](./images/image-20220330163110832.png)
 ## Release Notes
 
+### 0.0.4
+
+* Default value of toggle state is false.
+
 ### 0.0.3
 
-* Bugfix.
+* Build error fix.
 
 ### 0.0.2
 

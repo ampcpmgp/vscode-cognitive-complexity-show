@@ -8,7 +8,7 @@ const {
   workspace,
 } = require("vscode");
 
-let isActive = true;
+let isActive = false;
 
 const { getFileOutput, FileOutput } = require("cognitive-complexity-ts");
 
@@ -29,7 +29,7 @@ function activate(context) {
       if (document) processActiveFile(document);
     }),
     commands.registerCommand("cognitive-complexity-show.clear", () => {
-      window.visibleTextEditors.forEach((textEditor) => {
+      window.visibleTextEditors.forEach(() => {
         clearDecorations();
       });
     }),
@@ -86,7 +86,7 @@ function flattenInner(inner) {
  * @param {TextDocument} document
  */
 async function processActiveFile(document) {
-  if (!document || !isActive || !language(document)) return;
+  if (!document || !language(document)) return;
 
   let arr = {};
 
