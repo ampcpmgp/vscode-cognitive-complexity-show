@@ -6,4 +6,12 @@
 
 # How to upload
 
-TODO: input
+* Access https://dev.azure.com/ampcpmgp/_usersSettings/tokens - ampcpmgp is USER_NAME
+* Publish Access Token
+
+
+See more details - https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token
+
+```
+vsce login
+```
