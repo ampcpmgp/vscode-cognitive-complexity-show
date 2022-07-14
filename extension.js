@@ -86,7 +86,7 @@ function flattenInner(inner) {
  * @param {TextDocument} document
  */
 async function processActiveFile(document) {
-  if (!document || !language(document)) return;
+  if (!document || !language(document) || !isActive) return;
 
   let arr = {};
 

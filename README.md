@@ -4,18 +4,22 @@
 
 Show file cognitive complexity. (Only supported .js, ts, .jsx, .tsx)
 
-First, execute.
+Start with `Toggle cognitive-complexity-show` command.
 
-![image-20220330162804189.png](./images/image-20220330162804189.png)
+![](./images/202272214192208.gif)
 
-Last, see result.
+And stop with same command.
 
-![image-20220330162935655.png](./images/image-20220330162935655.png)
+Other command.
 
-If you want to delete result, clear.
+* `Execute cognitive-complexity-show`, execute only once.
+* `Clear cognitive-complexity-show`, clear all.
 
-![image-20220330163110832.png](./images/image-20220330163110832.png)
 ## Release Notes
+
+### 0.0.5
+
+* Fix cannot stop by toggle.
 
 ### 0.0.4
 
