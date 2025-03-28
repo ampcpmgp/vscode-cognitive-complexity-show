@@ -2,7 +2,7 @@
   "name": "cognitive-complexity-show",
   "displayName": "cognitive-complexity-show",
   "description": "",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.65.0"
   },
@@ -15,6 +15,7 @@
     "url": "https://github.com/ampcpmgp/vscode-cognitive-complexity-show"
   },
   "activationEvents": [
+    "workspaceContains:**/package.json",
     "onCommand:cognitive-complexity-show.execute",
     "onCommand:cognitive-complexity-show.clear",
     "onCommand:cognitive-complexity-show.toggle"
@@ -39,7 +40,8 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+    "test": "node ./test/runTest.js",
+    "extension": "vsce package"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
