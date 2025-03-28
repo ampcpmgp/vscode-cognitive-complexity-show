@@ -42,6 +42,9 @@ function activate(context) {
       }
     })
   );
+
+  isActive = true;
+  processActiveFile(window.activeTextEditor?.document)
 }
 
 function clearDecorations() {
