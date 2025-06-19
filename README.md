@@ -17,6 +17,10 @@ Other command.
 
 ## Release Notes
 
+### 0.0.7
+
+* Add setting enabled.
+
 ### 0.0.6
 
 * [feat: enabling extension on extension be activated](https://github.com/ampcpmgp/vscode-cognitive-complexity-show/pull/4)

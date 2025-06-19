@@ -35,7 +35,17 @@
         "command": "cognitive-complexity-show.toggle",
         "title": "Toggle cognitive-complexity-show"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Cognitive Complexity Show Configuration",
+      "properties": {
+        "cognitiveComplexityShow.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable or disable Cognitive Complexity Show."
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
