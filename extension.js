@@ -33,7 +33,7 @@ function activate(context) {
     }),
     commands.registerCommand("cognitive-complexity-show.toggle", async () => {
       const config = workspace.getConfiguration("cognitiveComplexityShow");
-      const currentValue = config.get("enabled", true);
+      const currentValue = config.get("enabled", false);
       await config.update("enabled", !currentValue, true); // Update the setting globally
 
       // The onDidChangeConfiguration event will handle the rest
@@ -42,7 +42,7 @@ function activate(context) {
 
   // Initial processing based on the setting
   const config = workspace.getConfiguration("cognitiveComplexityShow");
-  if (config.get("enabled", true)) {
+  if (config.get("enabled", false)) {
     processActiveFile(window.activeTextEditor?.document);
   }
 
@@ -51,7 +51,7 @@ function activate(context) {
     workspace.onDidChangeConfiguration((event) => {
       if (event.affectsConfiguration("cognitiveComplexityShow.enabled")) {
         const config = workspace.getConfiguration("cognitiveComplexityShow");
-        const isEnabled = config.get("enabled", true);
+        const isEnabled = config.get("enabled", false);
         if (isEnabled) {
           processActiveFile(window.activeTextEditor?.document);
         } else {
@@ -105,7 +105,7 @@ function flattenInner(inner) {
  */
 async function processActiveFile(document) {
   const config = workspace.getConfiguration("cognitiveComplexityShow");
-  const isEnabled = config.get("enabled", true);
+  const isEnabled = config.get("enabled", false);
 
   if (!document || !language(document) || !isEnabled) return;
 
