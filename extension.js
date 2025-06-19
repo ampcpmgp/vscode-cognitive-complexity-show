@@ -8,8 +8,6 @@ const {
   workspace,
 } = require("vscode");
 
-let isActive = false;
-
 const { getFileOutput, FileOutput } = require("cognitive-complexity-ts");
 
 const decorationType = window.createTextEditorDecorationType({
@@ -33,18 +31,35 @@ function activate(context) {
         clearDecorations();
       });
     }),
-    commands.registerCommand("cognitive-complexity-show.toggle", () => {
-      isActive = !isActive;
-      if (isActive) {
-        processActiveFile(window.activeTextEditor?.document);
-      } else {
-        deactivate();
-      }
+    commands.registerCommand("cognitive-complexity-show.toggle", async () => {
+      const config = workspace.getConfiguration("cognitiveComplexityShow");
+      const currentValue = config.get("enabled", false);
+      await config.update("enabled", !currentValue, true); // Update the setting globally
+
+      // The onDidChangeConfiguration event will handle the rest
     })
   );
 
-  isActive = true;
-  processActiveFile(window.activeTextEditor?.document)
+  // Initial processing based on the setting
+  const config = workspace.getConfiguration("cognitiveComplexityShow");
+  if (config.get("enabled", false)) {
+    processActiveFile(window.activeTextEditor?.document);
+  }
+
+  // Handle configuration changes
+  context.subscriptions.push(
+    workspace.onDidChangeConfiguration((event) => {
+      if (event.affectsConfiguration("cognitiveComplexityShow.enabled")) {
+        const config = workspace.getConfiguration("cognitiveComplexityShow");
+        const isEnabled = config.get("enabled", false);
+        if (isEnabled) {
+          processActiveFile(window.activeTextEditor?.document);
+        } else {
+          deactivate();
+        }
+      }
+    })
+  );
 }
 
 function clearDecorations() {
@@ -89,7 +104,10 @@ function flattenInner(inner) {
  * @param {TextDocument} document
  */
 async function processActiveFile(document) {
-  if (!document || !language(document) || !isActive) return;
+  const config = workspace.getConfiguration("cognitiveComplexityShow");
+  const isEnabled = config.get("enabled", false);
+
+  if (!document || !language(document) || !isEnabled) return;
 
   let arr = {};
 
