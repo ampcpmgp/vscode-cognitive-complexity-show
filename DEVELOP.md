@@ -13,3 +13,7 @@
 * `vsce publish -p <ACCESS_TOKEN>`
 
 See more details publish AccesesToken - https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token
+
+# Links
+
+- https://marketplace.visualstudio.com/items?itemName=ampcpmgp.cognitive-complexity-show
