@@ -68,10 +68,14 @@ function clearDecorations() {
   });
 }
 
-function getColor(complexity) {
-  if (complexity > 15) return "red";
-  if (complexity > 10) return "yellow";
-  return "green";
+function getColor(complexity, config) {
+  const highColor = config.get("color.high", "red");
+  const mediumColor = config.get("color.medium", "yellow");
+  const lowColor = config.get("color.low", "green");
+
+  if (complexity > 15) return highColor;
+  if (complexity > 10) return mediumColor;
+  return lowColor;
 }
 
 /**
@@ -113,12 +117,15 @@ async function processActiveFile(document) {
 
   const output = await getFileOutput(document.fileName);
   const flatten = flattenInner(output.inner);
+  const complexityConfig = workspace.getConfiguration(
+    "cognitiveComplexityShow"
+  );
 
   flatten.forEach((item) => {
     arr[item.line] = decoration(
       item.line,
       `${item.score} - Cognitive Complexity`,
-      getColor(item.score)
+      getColor(item.score, complexityConfig)
     );
   });
 

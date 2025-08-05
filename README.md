@@ -4,6 +4,8 @@
 
 Show file cognitive complexity. (Only supported .js, ts, .jsx, .tsx)
 
+For development information, see [DEVELOP.md](./DEVELOP.md).
+
 Start with `Toggle cognitive-complexity-show` command.
 
 ![](./images/202272214192208.gif)
@@ -16,6 +18,10 @@ Other command.
 * `Clear cognitive-complexity-show`, clear all.
 
 ## Release Notes
+
+### 0.0.8
+
+- Allow customizing cognitive complexity colors via VS Code settings.
 
 ### 0.0.7
 

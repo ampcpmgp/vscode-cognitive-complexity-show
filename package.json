@@ -2,7 +2,7 @@
   "name": "cognitive-complexity-show",
   "displayName": "cognitive-complexity-show",
   "description": "",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": "^1.65.0"
   },
@@ -43,6 +43,21 @@
           "type": "boolean",
           "default": false,
           "description": "Enable or disable Cognitive Complexity Show."
+        },
+        "cognitiveComplexityShow.color.high": {
+          "type": "string",
+          "default": "red",
+          "description": "Color for high cognitive complexity (score > 15)."
+        },
+        "cognitiveComplexityShow.color.medium": {
+          "type": "string",
+          "default": "yellow",
+          "description": "Color for medium cognitive complexity (score > 10)."
+        },
+        "cognitiveComplexityShow.color.low": {
+          "type": "string",
+          "default": "green",
+          "description": "Color for low cognitive complexity (score <= 10)."
         }
       }
     }
