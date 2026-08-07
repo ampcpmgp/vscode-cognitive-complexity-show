@@ -120,8 +120,10 @@ async function processActiveFile(document) {
   const complexityConfig = workspace.getConfiguration(
     "cognitiveComplexityShow"
   );
+  const threshold = complexityConfig.get("threshold", 0);
 
   flatten.forEach((item) => {
+    if (item.score < threshold) return;
     arr[item.line] = decoration(
       item.line,
       `${item.score} - Cognitive Complexity`,

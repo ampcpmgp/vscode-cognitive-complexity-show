@@ -58,6 +58,11 @@
           "type": "string",
           "default": "green",
           "description": "Color for low cognitive complexity (score <= 10)."
+        },
+        "cognitiveComplexityShow.threshold": {
+          "type": "number",
+          "default": 0,
+          "description": "Minimum cognitive complexity score to display."
         }
       }
     }
