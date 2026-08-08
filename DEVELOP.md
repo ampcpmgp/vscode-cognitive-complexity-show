@@ -14,6 +14,10 @@
 
 See more details publish AccesesToken - https://code.visualstudio.com/api/working-with-extensions/publishing-extension#get-a-personal-access-token
 
+## Note
+
+⚠️ Azure DevOps global Personal Access Tokens are retired on **2026-12-01**. Migrate to Microsoft Entra ID-based publishing (`vsce publish --azure-credential`) before then.
+
 # Links
 
 - https://marketplace.visualstudio.com/items?itemName=ampcpmgp.cognitive-complexity-show
