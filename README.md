@@ -19,6 +19,10 @@ Other command.
 
 ## Release Notes
 
+### 0.0.9
+
+- Add `cognitiveComplexityShow.threshold` setting to filter displayed items by minimum cognitive complexity score.
+
 ### 0.0.8
 
 - Allow customizing cognitive complexity colors via VS Code settings.
